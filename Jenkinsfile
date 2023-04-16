@@ -19,7 +19,7 @@ pipeline {
             steps {
                 git credentialsId: 'github', 
                 url: 'https://github.com/dhanrajlab/gitops-demo.git',
-                branch: 'dev'
+                branch: 'main'
             }
         }
         stage('Build Docker Image'){
