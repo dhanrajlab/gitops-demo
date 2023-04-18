@@ -60,10 +60,8 @@ pipeline {
                     git config --global user.email "dhanrajn5363@gmail.com"
                     git add deployment.yml
                     git commit -m 'Updated the deployment file' """
-                    git credentialsId: 'github', 
-                    url: 'https://github.com/dhanrajlab/gitops-demo.git',
- //                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'pass', usernameVariable: 'user')]) {
-//                        sh "git push http://$user:$pass@github.com/dhanrajlab/gitops-demo.git dev"
+                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                    sh "git push http://$user:$pass@github.com/dhanrajlab/gitops-demo.git dev"
                     }
                 }
             }
@@ -81,8 +79,8 @@ pipeline {
 //         stage('Push Docker Image'){
 //             steps {
 //                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-//                     #sh "docker login -u $user --password $pass"
-//                     sh " docker login -u ndhanraj --password priyabm1810
+//                     sh "docker login -u $user --password $pass"
+//                     
 //                     sh "docker push ${IMAGE_NAME}:${IMAGE_TAG} ."
 //                     sh "docker push ${IMAGE_NAME}:latest ."
 //                 }
