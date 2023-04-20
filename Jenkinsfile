@@ -47,8 +47,7 @@ pipeline {
          }
         stage ('Trigger Repo Pipeline'){
 		steps {
-			sh "curl -v -k --user dhanraj:110df18be52a43660cca44d26c46bf8c88 -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 
-			'IMAGE_TAG=${IMAGE_TAG}' 'http://34.66.3.243:8080/job/gitops-demo-config/buildWithParameters?token=gitops-demo-config'"
+			sh "curl -v -k --user dhanraj:110df18be52a43660cca44d26c46bf8c88 -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://34.66.3.243:8080/job/gitops-demo-config/buildWithParameters?token=gitops-demo-config'"
 		}
 	} 
 }
