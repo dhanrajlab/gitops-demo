@@ -51,21 +51,3 @@ pipeline {
 		}
 	} 
 }
-
-
-// stage('Build Docker Image'){
-//             steps {
-//                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
-//                 sh "docker build -t ${IMAGE_NAME}:latest ."
-//             }
-//         }
-//         stage('Push Docker Image'){
-//             steps {
-//                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-//                     sh "docker login -u $user --password $pass"
-//                     
-//                     sh "docker push ${IMAGE_NAME}:${IMAGE_TAG} ."
-//                     sh "docker push ${IMAGE_NAME}:latest ."
-//                 }
-//             }
-//         }
