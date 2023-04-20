@@ -19,7 +19,7 @@ pipeline {
             steps {
                 git credentialsId: 'github', 
                 url: 'https://github.com/dhanrajlab/gitops-demo.git',
-                branch: 'main'
+                branch: 'master'
             }
         }
         stage('Build Docker Image'){
@@ -44,29 +44,13 @@ pipeline {
                 sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
                 sh "docker rmi ${IMAGE_NAME}:latest"
             }
-        }
-        stage('Updating Kubernetes deployment file'){
-            steps {
-                sh "cat deployment.yml"
-                sh "sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml"
-                sh "cat deployment.yml"
-            }
-        }
-        stage('Push the changed deployment file to Git'){
-            steps {
-                script{
-                    sh """
-                    git config --global user.name "dhanrajlab"
-                    git config --global user.email "calsoftpersonallab@gmail.com"
-                    git add deployment.yml
-                    git commit -m 'Updated the deployment file' """         
-                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                    sh "git push https://$user:$pass@github.com/dhanrajlab/gitops-demo.git dev"
-                    }
-                }
-            }
-        }
-    }
+         }
+        stage ('Trigger Repo Pipeline'){
+		steps {
+			sh "curl -v -k --user dhanraj:110df18be52a43660cca44d26c46bf8c88 -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 
+			'IMAGE_TAG=${IMAGE_TAG}' 'http://34.66.3.243:8080/job/gitops-demo-config/buildWithParameters?token=gitops-demo-config'"
+		}
+	} 
 }
 
 
