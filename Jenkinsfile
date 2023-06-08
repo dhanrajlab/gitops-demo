@@ -5,10 +5,10 @@ pipeline {
         APP_NAME = "gitops-demo-app"
         IMAGE_TAG = "${BUILD_NUMBER}"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
-        REGISTRY_CREDS = 'dockerhub'
+        REGISTRY_CREDS = 'dockerhubargocd'
         }
     stages {
-        stage('Cleanup Workspace'){
+	stage('Cleanup Workspace'){
             steps {
                 script {
                     cleanWs()
@@ -24,7 +24,8 @@ pipeline {
         }
         stage('Build Docker Image'){
             steps {
-                script{
+                script{ 
+   		    sh "docker --version"
                     docker_image = docker.build "${IMAGE_NAME}"
                 }
             }
