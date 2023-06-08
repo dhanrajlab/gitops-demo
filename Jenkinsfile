@@ -5,7 +5,8 @@ pipeline {
         APP_NAME = "gitops-demo-app"
         IMAGE_TAG = "${BUILD_NUMBER}"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}
-        REGISTRY_CREDS = 'docker'        }
+        REGISTRY_CREDS = 'docker'  
+    }
     stages {
 	stage('Cleanup Workspace'){
             steps {
