@@ -8,7 +8,12 @@ pipeline {
         REGISTRY_CREDS = 'dockerhubargocd'
         }
     stages {
-        stage('Cleanup Workspace'){
+         stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+   	 }
+	
+	stage('Cleanup Workspace'){
             steps {
                 script {
                     cleanWs()
