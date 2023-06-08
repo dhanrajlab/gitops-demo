@@ -1,11 +1,11 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_USERNAME = "ndhanraj"
+        DOCKERHUB_USERNAME = "kunchalavikram"
         APP_NAME = "gitops-demo-app"
         IMAGE_TAG = "${BUILD_NUMBER}"
-        IMAGE_NAME = "${DOCKERHUB_ USERNAME}" + "/" + "${APP_NAME}
-        REGISTRY_CREDS = 'docker'  
+        IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+        REGISTRY_CREDS = 'dockerhub' 
     }
     stages {
 	stage('Cleanup Workspace'){
